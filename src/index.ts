@@ -10,4 +10,6 @@ const sshHosts = getSshHosts(sshConfigFileContent)
 const selectedHost = sshHosts.find(host => host.user==="archlinux")
 // mkdir(`${HOME}/foo`)
 
-vim.api.nvim_create_user_command("RemoteDev",'print("from ts to lua")',{})
+// vim.api.nvim_create_user_command("RemoteDev",'print("from ts to lua")',{})
+
+print("RemoteDev plugin loaded")

@@ -2672,7 +2672,7 @@ local selectedHost = __TS__ArrayFind(
     sshHosts,
     function(____, host) return host.user == "archlinux" end
 )
-vim.api.nvim_create_user_command("RemoteDev", "print(\"from ts to lua\")", {})
+print("RemoteDev plugin loaded")
 return ____exports
  end,
 ["types.methods"] = function(...) 
