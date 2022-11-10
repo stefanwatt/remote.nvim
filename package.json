@@ -1,0 +1,20 @@
+{
+  "name": "remote.nvim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "build": "tstl -p tsconfig.build.json",
+    "dev": "tstl -p tsconfig.build.json --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "lua-types": "^2.13.0",
+    "typescript": "^4.8.4",
+    "typescript-to-lua": "^1.10.1",
+    "vscode-languageserver-types": "^3.17.2"
+  }
+}
