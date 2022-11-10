@@ -2661,8 +2661,6 @@ return ____exports
 local ____lualib = require("lualib_bundle")
 local __TS__ArrayFind = ____lualib.__TS__ArrayFind
 local ____exports = {}
-local ____fs = require("fs")
-local mkdir = ____fs.mkdir
 local ____sshConfig = require("sshConfig")
 local getSshHosts = ____sshConfig.getSshHosts
 local readSshConfigFile = ____sshConfig.readSshConfigFile
@@ -2674,7 +2672,7 @@ local selectedHost = __TS__ArrayFind(
     sshHosts,
     function(____, host) return host.user == "archlinux" end
 )
-mkdir(tostring(HOME) .. "/foo")
+vim.api.nvim_create_user_command("RemoteDev", "print(\"from ts to lua\")", {})
 return ____exports
  end,
 ["types.methods"] = function(...) 

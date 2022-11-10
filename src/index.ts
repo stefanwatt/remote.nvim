@@ -8,4 +8,6 @@ const sshHosts = getSshHosts(sshConfigFileContent)
 
 //TODO replace with telescope picker
 const selectedHost = sshHosts.find(host => host.user==="archlinux")
-mkdir(`${HOME}/foo`)
+// mkdir(`${HOME}/foo`)
+
+vim.api.nvim_create_user_command("RemoteDev",'print("from ts to lua")',{})
