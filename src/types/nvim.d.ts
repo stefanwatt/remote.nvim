@@ -181,6 +181,7 @@ declare namespace vim {
     const has: (feature: string) => 0 | 1
     const mkdir: (path:string, arg:string) => 0|1
     const isdirectory: (path:string) => 0|1
+    const input: (prompt:string)=>string
   }
 
   namespace loop {

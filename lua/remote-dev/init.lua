@@ -2561,7 +2561,9 @@ return {
 local ____exports = {}
 ____exports.mkdir = function(path)
     if not (vim.fn.isdirectory(path) == 1) then
-        vim.fn.mkdir(path, "p")
+        return vim.fn.mkdir(path, "p")
+    else
+        return 0
     end
 end
 return ____exports
@@ -2670,17 +2672,47 @@ local HOME = os.getenv("HOME")
 local sshConfigPath = tostring(HOME) .. "/.ssh/config"
 local sshConfigFileContent = readSshConfigFile(sshConfigPath)
 local sshHosts = getSshHosts(sshConfigFileContent)
-local selectedHost = __TS__ArrayFind(
-    sshHosts,
-    function(____, host) return host.user == "archlinux" end
-)
-vim.api.nvim_create_user_command(
-    "RemoteDev",
-    function()
-        mkdir(tostring(HOME) .. "/fooooo")
-    end,
-    {}
-)
+local function sshfsConnect(____bindingPattern0)
+    local portSuffix
+    local remoteDirPath
+    local localDirPath
+    local selectedHost
+    selectedHost = ____bindingPattern0.selectedHost
+    localDirPath = ____bindingPattern0.localDirPath
+    remoteDirPath = ____bindingPattern0.remoteDirPath
+    portSuffix = ____bindingPattern0.portSuffix
+    return os.execute(((((((("sshfs " .. selectedHost.user) .. "@") .. selectedHost.hostName) .. ":") .. remoteDirPath) .. portSuffix) .. " ") .. localDirPath)
+end
+local function connectToHost()
+    local hostLabel = vim.fn.input("enter host label: ")
+    local selectedHost = __TS__ArrayFind(
+        sshHosts,
+        function(____, host) return host.user == hostLabel end
+    )
+    if not selectedHost then
+        return
+    end
+    local dirname = "ioaENHtoieaHNT"
+    local localDirPath = (tostring(HOME) .. "/") .. dirname
+    if mkdir(localDirPath) == 0 then
+        return
+    end
+    local remoteDirPath = vim.fn.input("enter remote dir")
+    if not remoteDirPath then
+        return
+    end
+    local portSuffix = not selectedHost.port and "" or "-p " .. tostring(selectedHost.port)
+    if sshfsConnect({selectedHost = selectedHost, localDirPath = localDirPath, remoteDirPath = remoteDirPath, portSuffix = portSuffix}) ~= 0 then
+        print("error sshfs")
+    end
+    vim.cmd("e " .. localDirPath)
+end
+vim.api.nvim_create_user_command("RemoteDev", connectToHost, {})
+return ____exports
+ end,
+["io"] = function(...) 
+--[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
+local ____exports = {}
 return ____exports
  end,
 ["types.methods"] = function(...) 
