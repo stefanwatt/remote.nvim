@@ -2694,7 +2694,7 @@ local function connectToHost()
     if not selectedHost then
         return print("host not found")
     end
-    local dirname = "ioENHoieaHNT"
+    local dirname = "ioENHoieaHNashtashtT"
     local localDirPath = (tostring(HOME) .. "/") .. dirname
     if mkdir(localDirPath) == 0 then
         return
@@ -2714,7 +2714,7 @@ local function connectToHost()
     }) ~= 0 then
         print("error sshfs")
     else
-        vim.cmd("e " .. localDirPath)
+        os.execute("nvim " .. localDirPath)
     end
 end
 vim.api.nvim_create_user_command("RemoteDev", connectToHost, {})

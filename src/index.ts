@@ -27,7 +27,7 @@ const connectToHost = ()=>{
   const selectedHost = sshHosts.find(host => host.name===hostLabel)
   if (!selectedHost) return print("host not found")
 
-  const dirname = "ioENHoieaHNT"
+  const dirname = "ioENHoieaHNashtashtT"
   const localDirPath = `${HOME}/${dirname}`
 
   if (mkdir(localDirPath) === 0) return // handle dir exists
@@ -40,7 +40,7 @@ const connectToHost = ()=>{
   const password = vim.fn.input("enter password: ")
 
   if(sshfsConnect({selectedHost,localDirPath,remoteDirPath,password,portSuffix}) !== 0) print("error sshfs")
-  else vim.cmd(`e ${localDirPath}`)
+  else os.execute(`nvim ${localDirPath}`)
 }
 
 vim.api.nvim_create_user_command("RemoteDev",connectToHost,{})
