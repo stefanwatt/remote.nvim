@@ -19,7 +19,7 @@ const sshfsConnect = ({
     password:string
     portSuffix:string
   }):number=>{
-  return os.execute(`echo ${password} | sshfs ${selectedHost.user}@${selectedHost.hostName}:${remoteDirPath}${portSuffix} ${localDirPath}`)
+  return os.execute(`echo ${password} | sshfs ${selectedHost.user}@${selectedHost.hostName}:${remoteDirPath} -o password_stdin${portSuffix} ${localDirPath}`)
 }
 
 const connectToHost = ()=>{

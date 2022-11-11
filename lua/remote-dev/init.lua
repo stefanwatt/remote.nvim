@@ -2683,7 +2683,7 @@ local function sshfsConnect(____bindingPattern0)
     remoteDirPath = ____bindingPattern0.remoteDirPath
     password = ____bindingPattern0.password
     portSuffix = ____bindingPattern0.portSuffix
-    return os.execute(((((((((("echo " .. password) .. " | sshfs ") .. selectedHost.user) .. "@") .. selectedHost.hostName) .. ":") .. remoteDirPath) .. portSuffix) .. " ") .. localDirPath)
+    return os.execute((((((((((("echo " .. password) .. " | sshfs ") .. selectedHost.user) .. "@") .. selectedHost.hostName) .. ":") .. remoteDirPath) .. " -o password_stdin") .. portSuffix) .. " ") .. localDirPath)
 end
 local function connectToHost()
     local hostLabel = vim.fn.input("enter host label: ")
