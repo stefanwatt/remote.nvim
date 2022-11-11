@@ -21,13 +21,17 @@ const sshfsConnect = ({
   }):number=>{
   return os.execute(`echo ${password} | sshfs ${selectedHost.user}@${selectedHost.hostName}:${remoteDirPath} -o password_stdin${portSuffix} ${localDirPath}`)
 }
+const getRngDirname = ()=>{
+  const rngNum = [0,0,0,0,0,0,0,0,0,0,0,0,0,0].reduce((acc,curr)=>acc+Math.floor(Math.random()*10),"")
+  return `remote-dev-${rngNum}`
+}
 
 const connectToHost = ()=>{
   const hostLabel = vim.fn.input("enter host label: ")
   const selectedHost = sshHosts.find(host => host.name===hostLabel)
   if (!selectedHost) return print("host not found")
 
-  const dirname = "ioENHoieaHNashtashtT"
+  const dirname = getRngDirname()
   const localDirPath = `${HOME}/${dirname}`
 
   if (mkdir(localDirPath) === 0) return // handle dir exists

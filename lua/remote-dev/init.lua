@@ -2661,6 +2661,7 @@ return ____exports
  end,
 ["index"] = function(...) 
 local ____lualib = require("lualib_bundle")
+local __TS__ArrayReduce = ____lualib.__TS__ArrayReduce
 local __TS__ArrayFind = ____lualib.__TS__ArrayFind
 local ____exports = {}
 local ____fs = require("fs")
@@ -2685,6 +2686,29 @@ local function sshfsConnect(____bindingPattern0)
     portSuffix = ____bindingPattern0.portSuffix
     return os.execute((((((((((("echo " .. password) .. " | sshfs ") .. selectedHost.user) .. "@") .. selectedHost.hostName) .. ":") .. remoteDirPath) .. " -o password_stdin") .. portSuffix) .. " ") .. localDirPath)
 end
+local function getRngDirname()
+    local rngNum = __TS__ArrayReduce(
+        {
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        },
+        function(____, acc, curr) return acc .. tostring(math.floor(math.random() * 10)) end,
+        ""
+    )
+    return "remote-dev-" .. rngNum
+end
 local function connectToHost()
     local hostLabel = vim.fn.input("enter host label: ")
     local selectedHost = __TS__ArrayFind(
@@ -2694,7 +2718,7 @@ local function connectToHost()
     if not selectedHost then
         return print("host not found")
     end
-    local dirname = "ioENHoieaHNashtashtT"
+    local dirname = getRngDirname()
     local localDirPath = (tostring(HOME) .. "/") .. dirname
     if mkdir(localDirPath) == 0 then
         return
