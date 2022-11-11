@@ -40,7 +40,9 @@ const connectToHost = ()=>{
   const password = vim.fn.input("enter password: ")
 
   if(sshfsConnect({selectedHost,localDirPath,remoteDirPath,password,portSuffix}) !== 0) print("error sshfs")
-  else os.execute(`nvim ${localDirPath}`)
+  else {
+    print("successfully connected")
+  }
 }
 
 vim.api.nvim_create_user_command("RemoteDev",connectToHost,{})

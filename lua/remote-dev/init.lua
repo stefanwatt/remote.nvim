@@ -2714,7 +2714,7 @@ local function connectToHost()
     }) ~= 0 then
         print("error sshfs")
     else
-        os.execute("nvim " .. localDirPath)
+        print("successfully connected")
     end
 end
 vim.api.nvim_create_user_command("RemoteDev", connectToHost, {})
