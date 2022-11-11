@@ -25,7 +25,10 @@ const sshfsConnect = ({
 const connectToHost = ()=>{
   const hostLabel = vim.fn.input("enter host label: ")
   const selectedHost = sshHosts.find(host => host.name===hostLabel)
-  if (!selectedHost) return print("host not found")
+  if (!selectedHost) {
+    print("host not found")
+    return 
+  }
 
   const dirname = "ioaENHtoieaHNT"
   const localDirPath = `${HOME}/${dirname}`
