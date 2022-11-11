@@ -2674,14 +2674,16 @@ local sshConfigFileContent = readSshConfigFile(sshConfigPath)
 local sshHosts = getSshHosts(sshConfigFileContent)
 local function sshfsConnect(____bindingPattern0)
     local portSuffix
+    local password
     local remoteDirPath
     local localDirPath
     local selectedHost
     selectedHost = ____bindingPattern0.selectedHost
     localDirPath = ____bindingPattern0.localDirPath
     remoteDirPath = ____bindingPattern0.remoteDirPath
+    password = ____bindingPattern0.password
     portSuffix = ____bindingPattern0.portSuffix
-    return os.execute(((((((("sshfs " .. selectedHost.user) .. "@") .. selectedHost.hostName) .. ":") .. remoteDirPath) .. portSuffix) .. " ") .. localDirPath)
+    return os.execute(((((((((("echo " .. password) .. " | sshfs ") .. selectedHost.user) .. "@") .. selectedHost.hostName) .. ":") .. remoteDirPath) .. portSuffix) .. " ") .. localDirPath)
 end
 local function connectToHost()
     local hostLabel = vim.fn.input("enter host label: ")
@@ -2702,10 +2704,18 @@ local function connectToHost()
         return
     end
     local portSuffix = not selectedHost.port and "" or "-p " .. tostring(selectedHost.port)
-    if sshfsConnect({selectedHost = selectedHost, localDirPath = localDirPath, remoteDirPath = remoteDirPath, portSuffix = portSuffix}) ~= 0 then
+    local password = vim.fn.input("enter password: ")
+    if sshfsConnect({
+        selectedHost = selectedHost,
+        localDirPath = localDirPath,
+        remoteDirPath = remoteDirPath,
+        password = password,
+        portSuffix = portSuffix
+    }) ~= 0 then
         print("error sshfs")
+    else
+        vim.cmd("e " .. localDirPath)
     end
-    vim.cmd("e " .. localDirPath)
 end
 vim.api.nvim_create_user_command("RemoteDev", connectToHost, {})
 return ____exports

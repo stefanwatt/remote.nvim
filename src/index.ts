@@ -10,14 +10,16 @@ const sshfsConnect = ({
     selectedHost,
     localDirPath,
     remoteDirPath,
+    password,
     portSuffix
   }: {
     selectedHost:Host,
     localDirPath:string,
     remoteDirPath:string,
+    password:string
     portSuffix:string
   }):number=>{
-  return os.execute(`sshfs ${selectedHost.user}@${selectedHost.hostName}:${remoteDirPath}${portSuffix} ${localDirPath}`)
+  return os.execute(`echo ${password} | sshfs ${selectedHost.user}@${selectedHost.hostName}:${remoteDirPath}${portSuffix} ${localDirPath}`)
 }
 
 const connectToHost = ()=>{
@@ -35,9 +37,10 @@ const connectToHost = ()=>{
 
   const portSuffix = !selectedHost.port ? "":`-p ${selectedHost.port}`
 
-  if(sshfsConnect({selectedHost,localDirPath,remoteDirPath,portSuffix}) !== 0) print("error sshfs")
+  const password = vim.fn.input("enter password: ")
 
-  vim.cmd(`e ${localDirPath}`)
+  if(sshfsConnect({selectedHost,localDirPath,remoteDirPath,password,portSuffix}) !== 0) print("error sshfs")
+  else vim.cmd(`e ${localDirPath}`)
 }
 
 vim.api.nvim_create_user_command("RemoteDev",connectToHost,{})
