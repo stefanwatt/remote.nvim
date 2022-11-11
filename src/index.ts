@@ -22,7 +22,7 @@ const sshfsConnect = ({
 
 const connectToHost = ()=>{
   const hostLabel = vim.fn.input("enter host label: ")
-  const selectedHost = sshHosts.find(host => host.user===hostLabel)
+  const selectedHost = sshHosts.find(host => host.name===hostLabel)
   if (!selectedHost) return
 
   const dirname = "ioaENHtoieaHNT"

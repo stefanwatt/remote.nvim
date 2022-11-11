@@ -2687,7 +2687,7 @@ local function connectToHost()
     local hostLabel = vim.fn.input("enter host label: ")
     local selectedHost = __TS__ArrayFind(
         sshHosts,
-        function(____, host) return host.user == hostLabel end
+        function(____, host) return host.name == hostLabel end
     )
     if not selectedHost then
         return
