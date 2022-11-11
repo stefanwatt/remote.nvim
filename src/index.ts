@@ -46,6 +46,7 @@ const connectToHost = ()=>{
   if(sshfsConnect({selectedHost,localDirPath,remoteDirPath,password,portSuffix}) !== 0) print("error sshfs")
   else {
     print("successfully connected")
+    vim.cmd(`e ${localDirPath}`)
   }
 }
 
