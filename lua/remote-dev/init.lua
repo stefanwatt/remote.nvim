@@ -2692,7 +2692,7 @@ local function connectToHost()
         function(____, host) return host.name == hostLabel end
     )
     if not selectedHost then
-        return
+        return print("host not found")
     end
     local dirname = "ioaENHtoieaHNT"
     local localDirPath = (tostring(HOME) .. "/") .. dirname
