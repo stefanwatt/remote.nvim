@@ -35,7 +35,7 @@ const connectToHost = ()=>{
   const remoteDirPath = vim.fn.input("enter remote dir: ")
   if(!remoteDirPath) return
 
-  const portSuffix = !selectedHost.port ? "":`-p ${selectedHost.port}`
+  const portSuffix = !selectedHost.port ? "":` -p ${selectedHost.port}`
 
   const password = vim.fn.input("enter password: ")
 

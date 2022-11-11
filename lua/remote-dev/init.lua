@@ -2703,7 +2703,7 @@ local function connectToHost()
     if not remoteDirPath then
         return
     end
-    local portSuffix = not selectedHost.port and "" or "-p " .. tostring(selectedHost.port)
+    local portSuffix = not selectedHost.port and "" or " -p " .. tostring(selectedHost.port)
     local password = vim.fn.input("enter password: ")
     if sshfsConnect({
         selectedHost = selectedHost,
