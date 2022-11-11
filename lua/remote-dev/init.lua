@@ -2692,15 +2692,14 @@ local function connectToHost()
         function(____, host) return host.name == hostLabel end
     )
     if not selectedHost then
-        print("host not found")
-        return
+        return print("host not found")
     end
-    local dirname = "ioaENHtoieaHNT"
+    local dirname = "ioENHoieaHNT"
     local localDirPath = (tostring(HOME) .. "/") .. dirname
     if mkdir(localDirPath) == 0 then
         return
     end
-    local remoteDirPath = vim.fn.input("enter remote dir")
+    local remoteDirPath = vim.fn.input("enter remote dir: ")
     if not remoteDirPath then
         return
     end
